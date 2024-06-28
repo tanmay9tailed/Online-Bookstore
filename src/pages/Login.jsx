@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
-  const { logIn, loginwithGoogle, loading } = useContext(AuthContext);
+  const { login, loading } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [showOTPDialog, setShowOTPDialog] = useState(false); // State to manage OTP dialog
   const [otp, setOTP] = useState('');
@@ -11,17 +11,18 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const email = event.target.email.value;
+    const username = event.target.username.value;
     const password = event.target.password.value;
 
-    try {
-      await logIn(email, password);
-      setShowOTPDialog(true);
-      alert("Login successful");
-    } catch (error) {
-        alert("account doesn't exist")
-      setError(error.message);
-    }
+      const response = await login(username, password);
+      console.log(response)
+      if(response== "error")
+      setError("Incorrect username or password.");
+      else{
+        setShowOTPDialog(true);
+        alert("Login successful");
+      }
+
   };
 
   const handleVerifyOTP = () => {
@@ -34,15 +35,6 @@ const Login = () => {
     }
   };
 
-  const handleLoginWithGoogle = async () => {
-    try {
-      await loginwithGoogle();
-      navigate("/");
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
   return (
     <section className="flex flex-col md:flex-row h-screen items-center bg-blue-200">
       <div className="w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
@@ -50,8 +42,8 @@ const Login = () => {
           <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Login to your account</h1>
           <form onSubmit={handleLogin} className="mt-6">
             <div>
-              <label className="block text-gray-700">email</label>
-              <input type="text" name="email" placeholder="Enter email" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required />
+              <label className="block text-gray-700">username</label>
+              <input type="text" name="username" placeholder="Enter username" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required />
             </div>
             <div className="mt-4">
               <label className="block text-gray-700">Password</label>
@@ -63,12 +55,7 @@ const Login = () => {
             <button type="submit" disabled={loading} className={`w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>Login</button>
           </form>
           <hr className="my-6 border-gray-300 w-full" />
-          <button onClick={handleLoginWithGoogle} type="button" disabled={loading} className={`w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
-            <div className="flex items-center justify-center">
-              <span className="ml-4">Log in with Google</span>
-            </div>
-          </button>
-          <p className="mt-8">Don't have an account? <Link to={"/signup"} className="text-blue-500 hover:text-blue-700 font-semibold">Sign Up for a new account</Link></p>
+          <p className="mt-8">Dont't have an account? <Link to={"/signup"} className="text-blue-500 hover:text-blue-700 font-semibold">Sign Up for a new account</Link></p>
           {error && <p className="mt-4 text-red-500">{error}</p>}
         </div>
       </div>

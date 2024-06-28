@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const ProfileCompletionForm = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+  const loc = useLocation();
+  const { userId } = loc.state || {};
   const [location, setLocation] = useState('');
   const [age, setAge] = useState('');
   const [work, setWork] = useState('');
@@ -14,14 +15,13 @@ const ProfileCompletionForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Send POST request to backend API
-      const response = await fetch('/upload-profile', {
+      const response = await fetch('http://localhost:3000/upload-profile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name,
+          userId, // Include userId in the request payload
           location,
           age,
           work,
@@ -32,7 +32,6 @@ const ProfileCompletionForm = () => {
       if (!response.ok) {
         throw new Error('Failed to save profile information');
       }
-      // Handle success: navigate to home page or next step
       navigate('/');
     } catch (error) {
       setError(error.message);
@@ -45,16 +44,6 @@ const ProfileCompletionForm = () => {
         <div className="w-full h-100 px-8 py-5 shadow-2xl bg-blue-50 rounded-lg">
           <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Complete Your Profile</h1>
           <form onSubmit={handleSubmit} className="mt-6">
-            <div>
-              <label className="block text-gray-700">Name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-                required
-              />
-            </div>
             <div>
               <label className="block text-gray-700">Location</label>
               <input

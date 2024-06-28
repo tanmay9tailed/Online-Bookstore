@@ -8,7 +8,8 @@ import { AuthContext } from "../../context/AuthProvider";
 const Navbar = () => {
   const [mobile, setMobile] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
-  const { logOut, user } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
+  // console.log(user.userId)
 
   const navItems = [
     { link: "Home", path: "/" },
@@ -65,7 +66,7 @@ const Navbar = () => {
           {user && (
             <Link
               className="text-white bg-red-500 py-2 px-5 rounded-lg"
-              onClick={logOut}
+              onClick={logout}
               to={'/login'}
             >
               Logout
@@ -73,7 +74,7 @@ const Navbar = () => {
           )}
           {!user && (
             <Link
-              className="text-white bg-green-600 py-2 px-5 rounded-lg"
+              className="text-white bg-green-600 py-2 px-5 rounded-lg sm:block hidden"
               to={'/signup'}
             >
               Sign Up
@@ -98,7 +99,7 @@ const Navbar = () => {
         {user && (
           <Link
             className="text-white bg-red-500 py-2 px-5 rounded-lg"
-            onClick={logOut}
+            onClick={logout}
             to={'/login'}
           >
             Logout
