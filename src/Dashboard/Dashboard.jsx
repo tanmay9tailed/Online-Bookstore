@@ -1,27 +1,17 @@
-import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../../context/AuthProvider";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 
 const Dashboard = () => {
-  const { getUserDetails, user } = useContext(AuthContext);
-  const [details, setDetails] = useState(null);
-  const userId = user.userId; 
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const userDetails = await getUserDetails(userId);
-        setDetails(userDetails);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUserDetails();
-  }, [getUserDetails, userId]);
-
-  if (!details) {
-    return <div>Loading...</div>;
-  }
+  const { id } = useParams();
+  const {
+    username,
+    email,
+    age,
+    description,
+    dob,
+    location,
+    work,
+  } = useLoaderData();
 
   return (
     <div className="bg-blue-100 min-h-screen w-full flex flex-col justify-center items-center">
@@ -37,8 +27,8 @@ const Dashboard = () => {
             />
           </div>
           <div>
-            <h2 className="text-xl font-semibold">@{details.username}</h2>
-            <p className="text-gray-600">{details.email}</p>
+            <h2 className="text-xl font-semibold">@{username}</h2>
+            <p className="text-gray-600">{email}</p>
           </div>
         </div>
         <div className="mt-6">
@@ -47,29 +37,29 @@ const Dashboard = () => {
             <ul className="divide-y divide-gray-200">
               <li className="flex items-center py-2">
                 <span className="w-1/4 font-semibold">Location:</span>
-                <span className="pl-5 text-gray-600">{details.location || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{location}</span>
               </li>
               <li className="flex items-center py-2">
                 <span className="w-1/4 font-semibold">Age:</span>
-                <span className="pl-5 text-gray-600">{details.age || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{age}</span>
               </li>
               <li className="flex items-center py-2">
                 <span className="w-1/4 font-semibold">Work:</span>
-                <span className="pl-5 text-gray-600">{details.work || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{work}</span>
               </li>
               <li className="flex items-center py-2">
                 <span className="w-1/4 font-semibold">Date of Birth:</span>
-                <span className="pl-5 text-gray-600">{details.dob || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{dob}</span>
               </li>
               <li className="flex items-start py-2">
                 <span className="w-1/4 font-semibold">Description:</span>
-                <span className="pl-5 text-gray-600">{details.description || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{description}</span>
               </li>
             </ul>
           </div>
         </div>
         <div className="pt-10 w-full flex justify-end">
-        <Link className="text-white bg-green-500 py-2 px-5 rounded-lg transition-colors hover:bg-green-600" to={'/admin/dashboard/editprofile'}>Edit</Link>
+        <Link className="text-white bg-green-500 py-2 px-5 rounded-lg transition-colors hover:bg-green-600" to={`/admin/dashboard/editprofile/${id}`}>Edit</Link>
         </div>
       </div>
     </div>

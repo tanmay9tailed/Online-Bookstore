@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const SideBar = () => {
   const { logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId")
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -16,14 +17,14 @@ const SideBar = () => {
   return (
     <Sidebar aria-label="Default sidebar example" className="h-screen">
       <Sidebar.Logo href="#" img={profile} imgAlt="Profile image" className="pt-14">
-        Tanmay Sahu
+        User Profile
       </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item onClick={() => handleNavigation('/')} icon={HiHome}>
             Home
           </Sidebar.Item>
-          <Sidebar.Item onClick={() => handleNavigation('/admin/dashboard')} icon={HiChartPie}>
+          <Sidebar.Item onClick={() => handleNavigation(`/admin/dashboard/${userId}`)} icon={HiChartPie}>
             Dashboard
           </Sidebar.Item>
           <Sidebar.Item onClick={() => handleNavigation('/admin/dashboard/upload')} icon={HiOutlineCloudDownload}>

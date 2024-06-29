@@ -15,7 +15,7 @@ const Navbar = () => {
     { link: "Home", path: "/" },
     { link: "About", path: "/about" },
     { link: "Shop", path: "/shop" },
-    { link: "Dashboard", path: "/admin/dashboard" },
+    { link: "Dashboard", path: `/admin/dashboard/${localStorage.getItem("userId")}` },
   ];
 
   const handleClick = () => {

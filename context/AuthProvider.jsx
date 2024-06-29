@@ -4,7 +4,7 @@ import React, { createContext, useEffect, useState } from "react";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
   // const navigate = useNavigate();
 
@@ -37,7 +37,9 @@ const AuthProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        setUser({ userId: data.userId });
+        localStorage.setItem("userId", data.userId);
+        // console.log(localStorage.getItem("userId"));
+        setUser(localStorage.getItem("userId"));
       }
       setLoading(false);
       return data;
@@ -60,12 +62,14 @@ const AuthProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        setUser({ userId: data.userId });
+        localStorage.setItem("userId", data.userId);
+        // console.log(localStorage.getItem("userId"));
+        setUser(localStorage.getItem("userId"));
         // localStorage.setItem("authToken", "dummyToken"); // Example: Set a dummy token for illustration
       }
-      if(response.status === 400){
+      if (response.status === 400) {
         setLoading(false);
-        return "error"
+        return "error";
       }
       setLoading(false);
       return data;
@@ -77,29 +81,11 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    // localStorage.removeItem("authToken");
-    setUser(null);
+    localStorage.removeItem("userId");
+    setUser("");
     // navigate("/login");
   };
-
-  const getUserDetails = async (userId) => {
-    try {
-      setLoading(true);
-      const response = await fetch(`http://localhost:3000/getUserData?user=${userId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setLoading(false);
-      return data;
-    } catch (error) {
-      setLoading(false);
-      console.error("Failed to get user details:", error);
-      throw new Error("Failed to get user details");
-    }
-  };
+  
   const updateUserProfile = async (updateData) => {
     try {
       const response = await fetch(`http://localhost:3000/updateUserProfile`, {
@@ -115,13 +101,12 @@ const AuthProvider = ({ children }) => {
       console.error("Failed to update user profile:", error);
     }
   };
-  
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("userId");
     if (token) {
-      // You can add token validation logic here if needed
-      setUser({ userId: "dummyUserId" }); // Example: Set a dummy user ID for illustration
+      setUser(token); 
+      // window.location.href = "/";
     }
     setLoading(false);
   }, []);
@@ -133,8 +118,7 @@ const AuthProvider = ({ children }) => {
     logout,
     loading,
     checkUserExists,
-    getUserDetails,
-    updateUserProfile
+    updateUserProfile,
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

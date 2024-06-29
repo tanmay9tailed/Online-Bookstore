@@ -27,7 +27,8 @@ const SignUp = () => {
       // Create user
       const createUserResponse = await createUser(email, password, username);
       setUserId(createUserResponse.userId);
-
+      localStorage.setItem("userId",createUserResponse.userId)
+      console.log(localStorage.getItem("userId"))
       setShowOTPDialog(true); // Show OTP dialog after successful signup
     } catch (error) {
       setError(error.message);

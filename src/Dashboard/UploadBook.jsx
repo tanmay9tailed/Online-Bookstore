@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const UploadBook = () => {
+  const navigate = useNavigate();
   const initialFormData = {
     book_name: '',
     author: '',
@@ -34,6 +36,7 @@ const UploadBook = () => {
       console.log(data)
       setFormData(initialFormData);
     })
+    navigate('/shop')
   };
 
   const genreOptions = [

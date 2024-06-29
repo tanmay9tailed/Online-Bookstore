@@ -1,38 +1,27 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
-  const { user, updateUserProfile, getUserDetails } = useContext(AuthContext);
-  const [details, setDetails] = useState(null);
-  const userId = user.userId;
-
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const userDetails = await getUserDetails(userId);
-        setDetails(userDetails);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUserDetails();
-  }, [getUserDetails, userId]);
-
-  const [formData, setFormData] = useState({
-        username: details.username || "",
-        email: details.email || "",
-        age: details.age || "",
-        description: details.description || "",
-        dob: details.dob || "",
-        location: details.location || "",
-        work: details.work || "",
-  });
-
+  const { updateUserProfile } = useContext(AuthContext);
   const [message, setMessage] = useState(null);
+  const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
+
+  const userData = useLoaderData();
+  const [formData, setFormData] = useState({
+    username: userData.username || "",
+    email: userData.email || "",
+    age: userData.age || "",
+    description: userData.description || "",
+    dob: userData.dob || "",
+    location: userData.location || "",
+    work: userData.work || "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -41,6 +30,7 @@ const EditProfile = () => {
       const response = await updateUserProfile({ ...formData, userId });
       if (response.message === "User profile updated successfully") {
         setMessage("Profile updated successfully");
+        navigate(`/admin/dashboard/${userId}`)
       } else {
         setMessage("Error updating profile");
       }
