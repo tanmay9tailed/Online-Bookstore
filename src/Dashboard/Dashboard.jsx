@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { getUserDetails, user } = useContext(AuthContext);
@@ -23,7 +24,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="bg-blue-50 min-h-screen w-full flex flex-col justify-center items-center">
+    <div className="bg-blue-100 min-h-screen w-full flex flex-col justify-center items-center">
       <div className="w-full sm:w-3/4 md:w-3/4 lg:w-1/2 bg-white shadow-lg sm:rounded-lg p-6">
         <h1 className="text-2xl font-bold mb-4">User Dashboard</h1>
         <div className="flex items-center mb-4">
@@ -46,26 +47,29 @@ const Dashboard = () => {
             <ul className="divide-y divide-gray-200">
               <li className="flex items-center py-2">
                 <span className="w-1/4 font-semibold">Location:</span>
-                <span className="text-gray-600">{details.location || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{details.location || "N/A"}</span>
               </li>
               <li className="flex items-center py-2">
                 <span className="w-1/4 font-semibold">Age:</span>
-                <span className="text-gray-600">{details.age || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{details.age || "N/A"}</span>
               </li>
               <li className="flex items-center py-2">
                 <span className="w-1/4 font-semibold">Work:</span>
-                <span className="text-gray-600">{details.work || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{details.work || "N/A"}</span>
               </li>
               <li className="flex items-center py-2">
                 <span className="w-1/4 font-semibold">Date of Birth:</span>
-                <span className="text-gray-600">{details.dob || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{details.dob || "N/A"}</span>
               </li>
               <li className="flex items-start py-2">
                 <span className="w-1/4 font-semibold">Description:</span>
-                <span className="text-gray-600">{details.description || "N/A"}</span>
+                <span className="pl-5 text-gray-600">{details.description || "N/A"}</span>
               </li>
             </ul>
           </div>
+        </div>
+        <div className="pt-10 w-full flex justify-end">
+        <Link className="text-white bg-green-500 py-2 px-5 rounded-lg transition-colors hover:bg-green-600" to={'/admin/dashboard/editprofile'}>Edit</Link>
         </div>
       </div>
     </div>

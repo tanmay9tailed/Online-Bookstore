@@ -100,6 +100,21 @@ const AuthProvider = ({ children }) => {
       throw new Error("Failed to get user details");
     }
   };
+  const updateUserProfile = async (updateData) => {
+    try {
+      const response = await fetch(`http://localhost:3000/updateUserProfile`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateData),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Failed to update user profile:", error);
+    }
+  };
   
 
   useEffect(() => {
@@ -118,7 +133,8 @@ const AuthProvider = ({ children }) => {
     logout,
     loading,
     checkUserExists,
-    getUserDetails
+    getUserDetails,
+    updateUserProfile
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

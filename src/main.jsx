@@ -22,6 +22,7 @@ import AuthProvider from "../context/AuthProvider.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
 import ProfileCompletionForm from "./pages/ProfileCompletionForm.jsx";
+import EditProfile from "./Dashboard/EditProfile.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,6 +45,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/admin/dashboard" element={<DashboardLayout />}>
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/dashboard/editprofile" element={<EditProfile />} />
         <Route path="/admin/dashboard/upload" element={<UploadBook />} />
         <Route path="/admin/dashboard/manage" element={<ManageBook />} />
         <Route
