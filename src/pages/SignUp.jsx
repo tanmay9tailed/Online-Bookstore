@@ -19,7 +19,8 @@ const SignUp = () => {
     try {
       // Check if username exists
       const response = await checkUserExists(username);
-      if (response.exists) {
+      // console.log(response)
+      if (response) {
         setError("Username already exists");
         return;
       }
