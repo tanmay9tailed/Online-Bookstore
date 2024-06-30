@@ -10,8 +10,6 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Shop from "./pages/Shop.jsx";
-import About from "./components/About.jsx";
-import Sell from "./components/Sell.jsx";
 import SingleBook from "./pages/SingleBook.jsx";
 import DashboardLayout from "./Dashboard/DashboardLayout.jsx";
 import Dashboard from "./Dashboard/Dashboard.jsx";
@@ -31,8 +29,6 @@ const router = createBrowserRouter(
       <Route path="/" element={<App />}>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/sell" element={<Sell />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<ProfileCompletionForm />} />
@@ -44,15 +40,11 @@ const router = createBrowserRouter(
           }
         />
         <Route
-          path="/book/:id/review"
+          path="/book/review/:id"
           element={<ReviewForm />}
-          // loader={({ params }) =>
-          //   fetch(`http://localhost:3000/book/${params.id}`)
-          // }
         />
       </Route>
       <Route path="/admin/dashboard" element={<DashboardLayout />}>
-        {/* <Route path="/admin/dashboard" element={<Dashboard />} /> */}
         <Route path="/admin/dashboard/upload" element={<UploadBook />} />
         <Route path="/admin/dashboard/manage" element={<ManageBook />} />
         <Route path="/admin/dashboard/editprofile" element={<EditProfile />} />

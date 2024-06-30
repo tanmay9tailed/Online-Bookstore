@@ -21,7 +21,7 @@ const ProfileCompletionForm = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId, // Include userId in the request payload
+          userId, 
           location,
           age,
           work,

@@ -28,8 +28,8 @@ const SignUp = () => {
       const createUserResponse = await createUser(email, password, username);
       setUserId(createUserResponse.userId);
       localStorage.setItem("userId",createUserResponse.userId)
-      console.log(localStorage.getItem("userId"))
-      setShowOTPDialog(true); // Show OTP dialog after successful signup
+      // console.log(localStorage.getItem("userId"))
+      setShowOTPDialog(true); 
     } catch (error) {
       setError(error.message);
     }
@@ -37,7 +37,7 @@ const SignUp = () => {
 
   const handleVerifyOTP = () => {
     if (otp.length === 5) {
-      navigate("/profile", { state: { userId } }); // Pass userId to the profile completion form
+      navigate("/profile", { state: { userId } }); 
     } else if (otp.length > 0) {
       setError("Please enter a valid OTP to continue");
     } else {

@@ -19,7 +19,6 @@ const Dashboard = () => {
         <h1 className="text-2xl font-bold mb-4">User Dashboard</h1>
         <div className="flex items-center mb-4">
           <div className="w-16 h-16 rounded-full overflow-hidden mr-4">
-            {/* Replace with actual image src={user.profileImage || "https://via.placeholder.com/150"} */}
             <img
               src="https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=1024x1024&w=is&k=20&c=oGqYHhfkz_ifeE6-dID6aM7bLz38C6vQTy1YcbgZfx8="
               alt="User Profile"

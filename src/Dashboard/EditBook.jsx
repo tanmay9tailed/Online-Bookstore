@@ -33,8 +33,6 @@ const EditBook = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can implement the logic to handle the form submission
-    // console.log(formData); // For demonstration purpose, logging the form data
 
     fetch(`http://localhost:3000/book/${id}`, {
       method: "PATCH",
@@ -71,7 +69,6 @@ const EditBook = () => {
     "Young Adult",
     "Memoir",
     "Business",
-    // Add more genre options as needed
   ];
 
   return (

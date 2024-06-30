@@ -13,7 +13,6 @@ const Navbar = () => {
 
   const navItems = [
     { link: "Home", path: "/" },
-    { link: "About", path: "/about" },
     { link: "Shop", path: "/shop" },
     { link: "Dashboard", path: `/admin/dashboard/${localStorage.getItem("userId")}` },
   ];

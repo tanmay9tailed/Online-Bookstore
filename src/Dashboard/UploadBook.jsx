@@ -22,8 +22,7 @@ const UploadBook = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can implement the logic to handle the form submission
-    console.log(formData); // For demonstration purpose, logging the form data
+    // console.log(formData); 
     
     fetch("http://localhost:3000/upload-book",{
       method:"POST",
@@ -33,7 +32,7 @@ const UploadBook = () => {
       body:JSON.stringify(formData)
     }).then(res => res.json()).then(data => {
       alert("uploaded successfull");
-      console.log(data)
+      // console.log(data)
       setFormData(initialFormData);
     })
     navigate('/shop')
@@ -60,7 +59,6 @@ const UploadBook = () => {
     "Young Adult",
     "Memoir",
     "Business",
-    // Add more genre options as needed
   ];
 
   return (
