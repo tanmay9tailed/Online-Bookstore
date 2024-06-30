@@ -64,7 +64,7 @@ const Navbar = () => {
           ))}
           {user && (
             <Link
-              className="text-white bg-red-500 hover:bg-red-600 transition-colors py-2 px-5 rounded-lg"
+              className="text-white bg-red-500 hover:bg-red-600 transition-colors py-2 px-5 rounded-lg sm:block hidden"
               onClick={logout}
               to={'/login'}
             >
