@@ -34,7 +34,7 @@ const EditBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/book/${id}`, {
+    fetch(`https://online-bookstore-backend-olive.vercel.app/book/${id}`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",

@@ -24,7 +24,7 @@ const UploadBook = () => {
     e.preventDefault();
     // console.log(formData); 
     
-    fetch("http://localhost:3000/upload-book",{
+    fetch("https://online-bookstore-backend-olive.vercel.app/upload-book",{
       method:"POST",
       headers:{
         "Content-type":"application/json",

@@ -9,7 +9,7 @@ const SingleBook = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/getReviews`)
+    fetch(`https://online-bookstore-backend-olive.vercel.app/getReviews`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, [bookId]);

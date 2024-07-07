@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
 
   const checkUserExists = async (username) => {
     try {
-      const response = await fetch("http://localhost:3000/check-username", {
+      const response = await fetch("https://online-bookstore-backend-olive.vercel.app/check-username", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
   const createUser = async (email, password, username) => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/createUser", {
+      const response = await fetch("https://online-bookstore-backend-olive.vercel.app/createUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("https://online-bookstore-backend-olive.vercel.app/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const AuthProvider = ({ children }) => {
   
   const updateUserProfile = async (updateData) => {
     try {
-      const response = await fetch(`http://localhost:3000/updateUserProfile`, {
+      const response = await fetch(`https://online-bookstore-backend-olive.vercel.app/updateUserProfile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

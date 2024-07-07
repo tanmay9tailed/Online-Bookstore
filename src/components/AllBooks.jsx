@@ -6,7 +6,7 @@ const AllBooks = ({headline,data1,data2}) => {
     const [books,setBooks] = useState([]);
 
     useEffect(() =>{
-        fetch("http://localhost:3000/all-books/").then(res => res.json()).then(data => setBooks(data.slice(data1, data2)))
+        fetch("https://online-bookstore-backend-olive.vercel.app/all-books/").then(res => res.json()).then(data => setBooks(data.slice(data1, data2)))
     },[])
   return (
     <div>

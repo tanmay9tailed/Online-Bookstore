@@ -7,11 +7,11 @@ const ManageBook = () => {
   const [books,setBooks] = useState([]);
 
   useEffect(() =>{
-      fetch("http://localhost:3000/all-books/").then(res => res.json()).then(data => setBooks(data))
+      fetch("https://online-bookstore-backend-olive.vercel.app/all-books/").then(res => res.json()).then(data => setBooks(data))
   },[])
 
   const handleClick = (id) => {
-    fetch(`http://localhost:3000/book/${id}`,{
+    fetch(`https://online-bookstore-backend-olive.vercel.app/book/${id}`,{
       method:"DELETE",
     }).then(res => res.json).then(data =>{ alert("Successfuly Deleted")})
   }

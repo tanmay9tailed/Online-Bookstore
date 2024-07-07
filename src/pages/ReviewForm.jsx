@@ -14,7 +14,7 @@ const ReviewForm = () => {
   const userId = localStorage.getItem("userId");
   useEffect(() => {
     const fetchUserData = async () => {
-      const user = await fetch(`http://localhost:3000/getUserData/${userId}`);
+      const user = await fetch(`https://online-bookstore-backend-olive.vercel.app/getUserData/${userId}`);
       const data = await user.json();
       SetUsername(data.username);
     };
@@ -24,7 +24,7 @@ const ReviewForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/submit-review", {
+      const response = await fetch("https://online-bookstore-backend-olive.vercel.app/submit-review", {
         method: "POST", 
         headers: {
           "Content-Type": "application/json",

@@ -15,7 +15,7 @@ const ProfileCompletionForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/upload-profile', {
+      const response = await fetch('https://online-bookstore-backend-olive.vercel.app/upload-profile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

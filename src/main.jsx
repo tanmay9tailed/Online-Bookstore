@@ -36,7 +36,7 @@ const router = createBrowserRouter(
           path="/book/:id"
           element={<SingleBook />}
           loader={({ params }) =>
-            fetch(`http://localhost:3000/book/${params.id}`)
+            fetch(`https://online-bookstore-backend-olive.vercel.app/book/${params.id}`)
           }
         />
         <Route
@@ -52,21 +52,21 @@ const router = createBrowserRouter(
           path="/admin/dashboard/:id"
           element={<Dashboard />}
           loader={({ params }) =>
-            fetch(`http://localhost:3000/getUserData/${params.id}`)
+            fetch(`https://online-bookstore-backend-olive.vercel.app/getUserData/${params.id}`)
           }
         />
         <Route
           path="/admin/dashboard/editprofile/:id"
           element={<EditProfile />}
           loader={({ params }) =>
-            fetch(`http://localhost:3000/getUserData/${params.id}`)
+            fetch(`https://online-bookstore-backend-olive.vercel.app/getUserData/${params.id}`)
           }
         />
         <Route
           path="/admin/dashboard/edit-books/:id"
           element={<EditBook />}
           loader={({ params }) =>
-            fetch(`http://localhost:3000/book/${params.id}`)
+            fetch(`https://online-bookstore-backend-olive.vercel.app/book/${params.id}`)
           }
         />
       </Route>
