@@ -36,9 +36,9 @@ const Bookcard = ({ books, headline }) => {
                   <p className="font-light">Author : {book.author}</p>
                   <p className="text-yellow-500">rating : {book.rating}</p>
                 </div>
-                <div className="shopping-cart absolute bg-blue-700 rounded-md p-3 top-[-11px] right-[-7px] hover:bg-blue-900 active:bg-blue-950">
+                <Link to={`/book/${book._id}`} className="shopping-cart absolute bg-blue-700 rounded-md p-3 top-[-11px] right-[-7px] hover:bg-blue-900 active:bg-blue-950">
                   <FaCartShopping />
-                </div>
+                </Link>
               </div>
             </SwiperSlide>
           ))}

@@ -2,6 +2,9 @@ import React from "react";
 import Banner from "../components/banner";
 import AllBooks from "../components/AllBooks";
 import Poster from "../components/Poster";
+import url from "../../url";
+
+console.log(url)
 
 const Home = () => {
 
