@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 const SignUp = () => {
-  const { createUser, checkUserExists, loading } = useContext(AuthContext);
+  const { createUser, checkUserExists, checkUserEmailExists, loading } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [showOTPDialog, setShowOTPDialog] = useState(false); // State to manage OTP dialog
   const [otp, setOTP] = useState("");
@@ -19,9 +19,14 @@ const SignUp = () => {
     try {
       // Check if username exists
       const response = await checkUserExists(username);
+      const response1 = await checkUserEmailExists(email);
       // console.log(response)
       if (response) {
         setError("Username already exists");
+        return;
+      }
+      if (response1) {
+        setError("Email already exists");
         return;
       }
 

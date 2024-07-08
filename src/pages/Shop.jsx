@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import url from "../../url";
 
 const Shop = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch("https://online-bookstore-backend-olive.vercel.app/all-books/")
+    fetch(`${url}/all-books/`)
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, []);

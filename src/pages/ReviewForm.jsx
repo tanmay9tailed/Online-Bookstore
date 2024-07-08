@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import url from "../../url";
 
 const ReviewForm = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const ReviewForm = () => {
   const userId = localStorage.getItem("userId");
   useEffect(() => {
     const fetchUserData = async () => {
-      const user = await fetch(`https://online-bookstore-backend-olive.vercel.app/getUserData/${userId}`);
+      const user = await fetch(`${url}/getUserData/${userId}`);
       const data = await user.json();
       SetUsername(data.username);
     };
@@ -24,7 +25,7 @@ const ReviewForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("https://online-bookstore-backend-olive.vercel.app/submit-review", {
+      const response = await fetch(`${url}/submit-review`, {
         method: "POST", 
         headers: {
           "Content-Type": "application/json",

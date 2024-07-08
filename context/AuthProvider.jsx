@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
+import url from "../url";
 
 export const AuthContext = createContext();
 
@@ -10,7 +11,7 @@ const AuthProvider = ({ children }) => {
 
   const checkUserExists = async (username) => {
     try {
-      const response = await fetch("https://online-bookstore-backend-olive.vercel.app/check-username", {
+      const response = await fetch(`${url}/check-username`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,11 +25,28 @@ const AuthProvider = ({ children }) => {
       return false;
     }
   };
+  
+  const checkUserEmailExists = async (email) => {
+    try {
+      const response = await fetch(`${url}/check-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+      return data.exists;
+    } catch (error) {
+      console.error("Failed to check email:", error);
+      return false;
+    }
+  };
 
   const createUser = async (email, password, username) => {
     try {
       setLoading(true);
-      const response = await fetch("https://online-bookstore-backend-olive.vercel.app/createUser", {
+      const response = await fetch(`${url}/createUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +71,7 @@ const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       setLoading(true);
-      const response = await fetch("https://online-bookstore-backend-olive.vercel.app/login", {
+      const response = await fetch(`${url}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +106,7 @@ const AuthProvider = ({ children }) => {
   
   const updateUserProfile = async (updateData) => {
     try {
-      const response = await fetch(`https://online-bookstore-backend-olive.vercel.app/updateUserProfile`, {
+      const response = await fetch(`${url}/updateUserProfile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -119,6 +137,7 @@ const AuthProvider = ({ children }) => {
     loading,
     checkUserExists,
     updateUserProfile,
+    checkUserEmailExists
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

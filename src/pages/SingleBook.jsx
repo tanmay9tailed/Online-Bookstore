@@ -1,15 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import StarRating from "../components/StarRating";
+import url from "../../url";
 
 const SingleBook = () => {
   const { id } = useParams();
   const bookId = id;
-  const { book_name, author, description, genre, publication_year, rating, book_cover_img_link } = useLoaderData();
+  const { book_name, author, description, price, genre, publication_year, rating, book_cover_img_link } =
+    useLoaderData();
   const [reviews, setReviews] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+  const userId = localStorage.getItem("userId");
+
+  const addToCart = () => {
+    fetch(`${url}/add-to-cart`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        book_name,
+        author,
+        description,
+        price,
+        genre,
+        publication_year,
+        rating,
+        book_cover_img_link,
+        userId,
+        quantity,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert("added successfull");
+      });
+  };
 
   useEffect(() => {
-    fetch(`https://online-bookstore-backend-olive.vercel.app/getReviews`)
+    fetch(`${url}/getReviews`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, [bookId]);
@@ -42,13 +71,41 @@ const SingleBook = () => {
           </div>
 
           <div className="border-t border-gray-200 pt-4">
+          <p className="text-base sm:text-lg mb-4">
+              <span className="font-bold text-blue-700">Price:</span>
+              <span> &#8377; </span>
+               {price}
+            </p>
             <p className="text-lg sm:text-xl mb-4 flex">
               <span className="font-bold text-blue-700 mr-3">Rating:</span>
-               <StarRating rating={rating} />
+              <StarRating rating={rating} />
             </p>
             <p className="text-base sm:text-lg mb-4">
               <span className="font-bold text-blue-700">Description:</span> {description}
             </p>
+          </div>
+
+          <div className="w-full">
+            <Link
+              className="bg-orange-700 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md"
+              to={`/cart/${userId}`}
+              onClick={addToCart}
+            >
+              Add To Cart
+            </Link>
+            <div className="w-full mt-5">
+              <label htmlFor="quantity" className="mr-2 font-bold text-blue-700">
+                Quantity:
+              </label>
+              <input
+                id="quantity"
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                className="border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
           </div>
 
           <div className="w-full flex items-end justify-end bottom-6 right-6">

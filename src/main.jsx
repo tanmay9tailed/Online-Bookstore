@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
+import url from "../url.js";
 import {
   createBrowserRouter,
   Route,
@@ -22,6 +23,7 @@ import Login from "./pages/Login.jsx";
 import ProfileCompletionForm from "./pages/ProfileCompletionForm.jsx";
 import EditProfile from "./Dashboard/EditProfile.jsx";
 import ReviewForm from "./pages/ReviewForm.jsx";
+import Cart from "./pages/Cart.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,16 +34,20 @@ const router = createBrowserRouter(
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<ProfileCompletionForm />} />
+        <Route path="/book/review/:id" element={<ReviewForm />} />
         <Route
           path="/book/:id"
           element={<SingleBook />}
           loader={({ params }) =>
-            fetch(`https://online-bookstore-backend-olive.vercel.app/book/${params.id}`)
+            fetch(`${url}/book/${params.id}`)
           }
         />
         <Route
-          path="/book/review/:id"
-          element={<ReviewForm />}
+          path="/cart/:id"
+          element={<Cart />}
+          loader={({ params }) =>
+            fetch(`${url}/cart/${params.id}`)
+          }
         />
       </Route>
       <Route path="/admin/dashboard" element={<DashboardLayout />}>
@@ -52,21 +58,21 @@ const router = createBrowserRouter(
           path="/admin/dashboard/:id"
           element={<Dashboard />}
           loader={({ params }) =>
-            fetch(`https://online-bookstore-backend-olive.vercel.app/getUserData/${params.id}`)
+            fetch(`${url}/getUserData/${params.id}`)
           }
         />
         <Route
           path="/admin/dashboard/editprofile/:id"
           element={<EditProfile />}
           loader={({ params }) =>
-            fetch(`https://online-bookstore-backend-olive.vercel.app/getUserData/${params.id}`)
+            fetch(`${url}/getUserData/${params.id}`)
           }
         />
         <Route
           path="/admin/dashboard/edit-books/:id"
           element={<EditBook />}
           loader={({ params }) =>
-            fetch(`https://online-bookstore-backend-olive.vercel.app/book/${params.id}`)
+            fetch(`${url}/book/${params.id}`)
           }
         />
       </Route>

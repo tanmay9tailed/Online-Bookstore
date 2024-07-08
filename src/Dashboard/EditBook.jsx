@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import url from "../../url";
 
 const EditBook = () => {
   const { id } = useParams();
@@ -34,7 +35,7 @@ const EditBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`https://online-bookstore-backend-olive.vercel.app/book/${id}`, {
+    fetch(`${url}/book/${id}`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",

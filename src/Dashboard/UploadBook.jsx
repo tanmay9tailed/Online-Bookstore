@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import url from "../../url";
 
 const UploadBook = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const UploadBook = () => {
     e.preventDefault();
     // console.log(formData); 
     
-    fetch("https://online-bookstore-backend-olive.vercel.app/upload-book",{
+    fetch(`${url}/upload-book`,{
       method:"POST",
       headers:{
         "Content-type":"application/json",

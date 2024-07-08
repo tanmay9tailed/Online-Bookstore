@@ -16,7 +16,7 @@ const Login = () => {
 
       const response = await login(username, password);
       console.log(response)
-      if(response== "error")
+      if(response == "error")
       setError("Incorrect username or password.");
       else{
         setShowOTPDialog(true);

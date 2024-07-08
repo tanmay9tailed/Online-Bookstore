@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
+import url from "../../url";
 
 const ManageBook = () => {
 
   const [books,setBooks] = useState([]);
 
   useEffect(() =>{
-      fetch("https://online-bookstore-backend-olive.vercel.app/all-books/").then(res => res.json()).then(data => setBooks(data))
+      fetch(`${url}/all-books/`).then(res => res.json()).then(data => setBooks(data))
   },[])
 
   const handleClick = (id) => {
-    fetch(`https://online-bookstore-backend-olive.vercel.app/book/${id}`,{
+    fetch(`http://localhost:3000/book/${id}`,{
       method:"DELETE",
     }).then(res => res.json).then(data =>{ alert("Successfuly Deleted")})
   }

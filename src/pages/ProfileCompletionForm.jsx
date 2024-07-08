@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import url from '../../url';
 
 const ProfileCompletionForm = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const ProfileCompletionForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('https://online-bookstore-backend-olive.vercel.app/upload-profile', {
+      const response = await fetch(`${url}/upload-profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
