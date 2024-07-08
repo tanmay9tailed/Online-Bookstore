@@ -1,6 +1,6 @@
 let url = ""
 if(import.meta.env.PROD){
-    url = "https://online-bookstore-c6mt.vercel.app"
+    url = "https://online-bookstore-backend-olive.vercel.app"
 }else{
     url = "http://localhost:3000"
 }
