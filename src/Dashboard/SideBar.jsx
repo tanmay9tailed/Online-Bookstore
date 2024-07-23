@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-// import profile from "../assets/profile.jpg";
+import profile from "../assets/profile.jpg";
 import { Sidebar } from "flowbite-react";
 import { HiChartPie, HiHome, HiInbox, HiOutlineCloudDownload, HiTable } from "react-icons/hi";
 import { AuthContext } from "../../context/AuthProvider";
