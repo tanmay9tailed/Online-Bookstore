@@ -1,13 +1,7 @@
 import React from "react";
 import { Footer } from "flowbite-react";
 ("use client");
-import {
-  BsDribbble,
-  BsFacebook,
-  BsGithub,
-  BsInstagram,
-  BsTwitter,
-} from "react-icons/bs";
+import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 import { FaBookOpen } from "react-icons/fa6";
 
 const FooterSection = () => {
@@ -44,7 +38,7 @@ const FooterSection = () => {
         </div>
         <Footer.Divider />
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-          <Footer.Copyright href="#" by="Tanmay Sahu" year={2024} />
+          <Footer.Copyright href="#" by="Anwesha Dash" year={2025} />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon href="#" icon={BsFacebook} />
             <Footer.Icon href="#" icon={BsInstagram} />
